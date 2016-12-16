@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css/common")
+    @Scripts.Render("~/Content/js/modernizr")
+</head>
+<body>
+    @RenderSection("header_js", required: false)
+    @RenderSection("header_css", required: false)
+
+    <div class="main">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/Content/js/jquery")
+    @Scripts.Render("~/Content/js/jqueryval")
+    @Scripts.Render("~/Content/js/jquery-ui")
+    @Styles.Render("~/Content/css/jquery-ui")
+
+    @Scripts.Render("~/Content/js/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @Scripts.Render("~/Content/js/Common")
+
+    @RenderSection("footer_js", required: false)
+    @RenderSection("footer_css", required: false)
+
+
+</body>
+</html>

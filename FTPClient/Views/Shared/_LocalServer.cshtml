@@ -1,0 +1,111 @@
+﻿@using FTPClient.BL.Model;
+@using FTPClient.BL.Settings;
+@using FTPClient.BL;
+
+@model FTPClient.Models.FTPControlModel
+<div class="server-container local-server" id="localServerList">
+    <div class="filter-block local-filter-block">
+        @Html.TextBoxFor(m => m.LocalFilterPattern, new {
+       @style = "width:50%;"
+   })
+        <button type="button" name="Connect" id="btn_local_filter_submit" class="btn btn-bar-small btn-filter-submit"><i class="icon-filter-1"></i></button>
+        <button type="button" name="Connect" id="btn_local_filter_reset" class="btn btn-bar-small"><i class="icon-cancel"></i></button>
+    </div>
+    <div><i class="icon-folder-open"></i> 
+        @if (Model.LocalServerPath.IndexOf(@"\") != Model.LocalServerPath.Length - 1)
+        {
+            string[] pathList = Model.LocalServerPath.Split('\\');
+
+            for (int i = 0; i < pathList.Length; i++)
+            {
+                string pathName = pathList[i];
+                string localPath = string.Empty;
+                for (int j = 0; j < i + 1; j++)
+                {
+                    localPath += pathList[j] + @"\";
+                }
+
+                if (localPath.IndexOf(@"\") != localPath.LastIndexOf(@"\"))
+                {
+                    localPath = localPath.Substring(0, localPath.Length - 1);
+                }
+
+                @Ajax.ActionLink(pathName, "ViewServerInfo", "BGFTP", new {
+                path = localPath,
+                env = FTPClient.Settings.Constants.ENV_LOCAL
+                },
+                new AjaxOptions
+                {
+                    OnComplete = "setLocalServer"
+                })<text>\</text>
+            }
+        }
+        else
+        {
+            @Ajax.ActionLink(Model.LocalServerPath, "ViewServerInfo", "BGFTP", new {
+            path = Model.LocalServerPath,
+            env = FTPClient.Settings.Constants.ENV_LOCAL
+            },
+                new AjaxOptions
+                {
+                    OnComplete = "setLocalServer"
+                })<text></text>
+        }
+    </div>
+    <ul class="file-list-header local-file-label">
+        <li class="file-header local-file-header">
+            <span class="file-name">名前</span>
+            <span class="file-date">日付</span>
+            <span class="file-size">サイズ</span>
+            <span class="file-type">種類</span>
+        </li>
+    </ul>
+    <div class="list-block">
+        <div class="local-server-list">
+            <ul class="file-list-detail local-file-list">
+
+                @if (Model.LocalList != null)
+                {
+                    foreach (ResourceInfoModel localFile in Model.LocalList)
+                    {
+                        if (localFile.Type == Constants.ResourceType.Directory)
+                        {
+                            <li class="file-item local-file-item is-dic" data-isupload="true" data-fileid="@localFile.Name">
+                                <span class="file-detail file-name">
+                                    <i class="icon-folder-1"></i>
+                                    @Ajax.ActionLink(localFile.Name, "ViewServerInfo", "BGFTP", new {
+                                   path = localFile.Name == ".." ? localFile.Name : localFile.FullPath,
+                                   env = FTPClient.Settings.Constants.ENV_LOCAL
+                               },
+                                    new AjaxOptions
+                                    {
+                                        OnComplete = "setLocalServer"
+                                    })
+                                </span>
+                                @if (localFile.Name != "..")
+                                {
+                                    <span class="file-date">@localFile.LastWrittenTime</span>
+                                }
+                                else
+                                {
+                                    <span class="file-date">--</span>
+                                }
+                                <span class="file-size">--</span>
+                                <span class="file-type">--</span>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="file-item local-file-item is-file" data-isupload="true" data-fileid="@localFile.Name">
+                                <span class="file-name"><i class="icon-doc"></i> @localFile.Name</span>
+                                <span class="file-date">@localFile.LastWrittenTime</span>
+                                <span class="file-size">@Common.GetFileSizeTextFormat(localFile.Length, 0)</span>
+                                <span class="file-type">@localFile.Extension</span>
+                            </li>
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>

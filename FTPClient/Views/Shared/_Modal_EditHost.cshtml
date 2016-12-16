@@ -1,0 +1,135 @@
+﻿@model FTPClient.Models.FTPHostDetailModel
+
+<div class="modal fade" id="modal_edit_host" tabindex="-1" role="dialog" aria-labelledby="add-site-label" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new {
+                id = "form_edit_host"
+            }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <label class="title"></label>
+                </div>
+                <div class="modal-body">
+                    <div class="host-input-table">
+                        <div class="host-input-tr">
+                            <div class="host-input-td-title"><span class="headtitle"><i class="icon-tag"></i> Host Name</span></div>
+                            <div class="host-input-td-detail">
+
+                                @Html.TextBoxFor(m => m.HostName, new {
+                                   @class = "input-host-name"
+                               })
+                                <div>@Html.ValidationMessageFor(m => m.HostName)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="host-input-table">
+                        <div class="host-input-tr">
+                            <div class="host-input-td-title">
+                                <span class="headtitle"><i class="icon-home-1"></i> Host</span>
+                            </div>
+                            <div class="host-input-td-detail">
+                                @Html.TextBoxFor(m => m.HostAddress, new {
+                                   @class = "input-host-address"
+                               })
+                                <div>@Html.ValidationMessageFor(m => m.HostAddress)</div>
+                            </div>
+
+                            <div class="host-input-td-title-between">
+                                <span class="headtitle"><i class="icon-sitemap"></i> Port</span>
+                            </div>
+                            <div class="host-input-td-detail">
+                                @Html.TextBoxFor(m => m.PortNumber, new {
+                                   @class = "input-port-number"
+                               })
+                                <div>@Html.ValidationMessageFor(m => m.PortNumber)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="host-input-table">
+                        <div class="host-input-tr">
+                            <div class="host-input-td-title">
+                                <span class="headtitle"><i class="icon-user-6"></i> User</span>
+                            </div>
+                            <div class="host-input-td-detail">
+                                @Html.TextBoxFor(m => m.UserName, new {
+                               @class = "input-user-name"
+                           })
+                                <div>@Html.ValidationMessageFor(m => m.UserName)</div>
+                            </div>
+                            <div class="host-input-td-title-between">
+                                <span class="headtitle"><i class="icon-key-inv"></i> Password</span>
+                            </div>
+                            <div class="host-input-td-detail">
+                                @Html.TextBoxFor(m => m.Password, new {
+                               @class = "input-password"
+                           })
+                                <div>@Html.ValidationMessageFor(m => m.Password)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p style="text-align:right;">
+                        @Html.CheckBoxFor(m => m.Anonymous, new {
+                   })
+                        <span class="headtitle">Anonymous</span>
+                    </p>
+
+                    <button type="button" id="btn_host_settings" class="btn btn-default btn-hostmenu" title="詳細設定"><i id="icon_settins_open" class="icon-right-open-4"></i> Settings</button>
+
+                    <div id="host_add_option" class="host-option">
+                        <div id="host_ettings">
+                            <label><i class="icon-wrench"></i> Settings</label>
+
+                            <div class="host-input-table">
+                                <div class="host-input-tr">
+                                    <div class="host-input-td-title"><span class="headtitle">Timeout</span></div>
+                                    <div class="host-input-td-timeout">
+                                        @Html.TextBoxFor(m => m.Timeout, new {
+                                       @class = "input-timeout"
+                                   })
+                                        <div>@Html.ValidationMessageFor(m => m.Timeout)</div>
+                                    </div>
+
+                                    <div class="host-input-td-title-between"><span class="headtitle">PASV Mode</span></div>
+                                    <div class="host-input-td-detail">
+                                        @Html.CheckBoxFor(m => m.PasvMode, new {
+                                       @checked = true
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="host_default_folder">
+                            <label><i class="icon-folder"></i> Default Path</label>
+                            <div class="host-input-table">
+                                <div class="host-input-tr">
+                                    <div class="host-input-td-title"><span class="headtitle">Local Server</span></div>
+                                    <div class="host-input-td-detail">
+                                        @Html.TextBoxFor(m => m.LocalServerPath, new {
+                                       @class = "input-local-server-path"
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="connect-test-result" style="display:none;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn_connect_test" class="btn btn-default btn-hostmenu"><i class="icon-link-5"></i> Test</button>
+                    <button type="submit" id="btn_edit_ok" class="btn btn-default btn-hostmenu"><i class="icon-ok-5"></i> OK</button>
+                    <button type="button" class="btn btn-default btn-hostmenu btn-etc" data-dismiss="modal"><i class="icon-cancel-6"></i> Cancel</button>
+                </div>
+            }
+        </div>
+    </div>
+    @Html.Partial("_Loading")
+</div>

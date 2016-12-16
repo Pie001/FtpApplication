@@ -1,0 +1,41 @@
+﻿@using FTPClient.Models;
+@using FTPClient.BL.Model;
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section footer_js{
+    @Scripts.Render("~/Content/js/Connect")
+}
+
+<div class="init-host" id="block_conection_config">
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new {
+        id = "form_host_settings"
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <label class="title"><i class="icon-cog-5"></i> 接続設定</label>
+        <div class="host-menu">
+            <button type="button" id="btn_new_host" class="btn btn-default btn-hostmenu" title="新規ホストを追加"><i class="icon-plus-3"></i> New</button>
+            <button type="button" id="btn_edit_host" class=" btn btn-default btn-hostmenu" title="ホストの内容を変更"><i class="icon-pencil-6"></i> Edit</button>
+            <button type="button" id="btn_copy_host" class="btn btn-default btn-hostmenu" title="既存ホストのコピー"><i class="icon-popup-1"></i> Copy</button>
+            <button type="button" id="btn_remove_host" class="btn btn-default btn-hostmenu" title="ホストの削除"><i class="icon-trash-7"></i> Remove</button>
+        </div>
+
+        <div class="host-main">
+            <ul id="host_list_block">
+                @foreach (HostDetailModel host in ViewBag.hostList)
+                {
+                    <li data-hostid="@host.HostID"><i class="icon-monitor"></i> @host.HostName</li>
+                }
+            </ul>
+        </div>
+        <div class="block-right"><button type="button" name="Connect" id="btn_connect" class="btn btn-default btn-hostmenu" title="接続"><i class="icon-plug"></i> Connect</button></div>
+    }
+</div>
+
+@Html.Partial("_Loading")
+@Html.Partial("_Modal_EditHost", new FTPHostDetailModel())
+@Html.Partial("_Modal_CopyHost", new CopyHostModel())

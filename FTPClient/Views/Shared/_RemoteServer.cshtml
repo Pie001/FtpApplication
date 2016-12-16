@@ -1,0 +1,107 @@
+﻿@using FTPClient.BL.Model;
+@using FTPClient.BL.Settings;
+
+@model FTPClient.Models.FTPControlModel
+
+<div class="server-container remote-server" id="remoteServerList">
+    <div class="filter-block remote-filter-block">
+        @Html.TextBoxFor(m => m.RemoteFilterPattern, new {
+       @style = "width:50%;"
+   })
+        <button type="button" name="Connect" id="btn_remote_filter_submit" class="btn btn-bar-small btn-filter-submit"><i class="icon-filter-1"></i></button>
+        <button type="button" name="Connect" id="btn_remote_filter_reset" class="btn btn-bar-small"><i class="icon-cancel"></i></button>
+    </div>
+    <div>
+        <i class="icon-folder-open"></i>
+        @if (Model.RemoteServerPath.IndexOf("/") != -1 && Model.RemoteServerPath.IndexOf("/") != Model.RemoteServerPath.Length - 1)
+        {
+            string[] pathList = Model.RemoteServerPath.Split('/');
+
+            for (int i = 0; i < pathList.Length; i++)
+            {
+                string pathName = pathList[i];
+                string remotePath = string.Empty;
+                for (int j = 0; j < i + 1; j++)
+                {
+                    remotePath += pathList[j] + "/";
+                }
+
+                @Ajax.ActionLink(pathName, "ViewServerInfo", "BGFTP", new {
+               path = remotePath.Substring(0, remotePath.Length - 1),
+               env = FTPClient.Settings.Constants.ENV_REMOTE
+           },
+                new AjaxOptions
+                {
+                    OnComplete = "setRemoteServer"
+                })<text>/</text>
+            }
+        }
+        else
+        {
+            @Ajax.ActionLink(Model.RemoteServerPath, "ViewServerInfo", "BGFTP", new {
+           path = Model.RemoteServerPath.Substring(0, Model.RemoteServerPath.Length),
+           env = FTPClient.Settings.Constants.ENV_REMOTE
+       },
+                new AjaxOptions
+                {
+                    OnComplete = "setRemoteServer"
+                })<text></text>
+        }
+    </div>
+
+
+
+    <ul class="file-list-header remote-file-label">
+        <li class="file-header remote-file-header">
+            <span class="file-name">名前</span>
+            <span class="file-date">日付</span>
+            <span class="file-size">サイズ</span>
+            <span class="file-type">種類</span>
+        </li>
+    </ul>
+    <div class="list-block">
+        <div class="remote-server-list">
+            <ul class="file-list-detail remote-file-list">
+                @foreach (ResourceInfoModel remoteFile in Model.RemoteList)
+                {
+                    if (remoteFile.Type == Constants.ResourceType.Directory)
+                    {
+                        <li class="file-item local-file-item is-dic" data-isdownload="true" data-fileid="@remoteFile.Name">
+
+                            <span class="file-detail file-name">
+                                <i class="icon-folder-1"></i>
+                                @Ajax.ActionLink(remoteFile.Name, "ViewServerInfo", "BGFTP", new {
+                               path = remoteFile.Name == ".." ? remoteFile.Name : remoteFile.FullPath,
+                               env = FTPClient.Settings.Constants.ENV_REMOTE
+                           },
+                                new AjaxOptions
+                                {
+                                    OnComplete = "setRemoteServer"
+                                })
+                            </span>
+                            @if (remoteFile.Name != "..")
+                            {
+                                <span class="file-date">@remoteFile.LastWrittenTime</span>
+                            }
+                            else
+                            {
+                                <span class="file-date">--</span>
+                            }
+                            <span class="file-size">--</span>
+                            <span class="file-type">--</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="file-item local-file-item is-file" data-isdownload="true" data-fileid="@remoteFile.Name">
+                            <span class="file-name"><i class="icon-doc"></i> @remoteFile.Name</span>
+                            <span class="file-date">@remoteFile.LastWrittenTime</span>
+                            <span class="file-size">@FTPClient.BL.Common.GetFileSizeTextFormat(remoteFile.Length, 0)</span>
+                            <span class="file-type">@remoteFile.Extension</span>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>

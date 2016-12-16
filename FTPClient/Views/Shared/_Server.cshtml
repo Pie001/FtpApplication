@@ -1,0 +1,21 @@
+﻿@model FTPClient.Models.FTPControlModel
+
+<div class="server">
+    @Html.Partial("_LocalServer", Model)
+    @Html.Partial("_RemoteServer", Model)
+</div>
+
+
+<ul class="context-menu-list context-menu-local context-menu-root" style="display:none; width: 100px; top: 220px; left: 750px; z-index: 1;">
+    <li class="context-menu-item resource-upload context-menu-upload"><span><i class="icon-up-big"></i> アップロード</span></li>
+    <li class="context-menu-item resource-remove context-menu-local-remove"><span><i class="icon-trash-7"></i> 削除</span></li>
+    <li class="context-menu-item change-resource-name context-menu-local-change-name"><span><i class="icon-tags"></i> 名前変更</span></li>
+    <li class="context-menu-item make-directory"><span><i class="icon-folder-add"></i> フォルダ作成</span></li>
+</ul>
+
+<ul class="context-menu-list context-menu-remote context-menu-root" style="display:none; width: 100px; top: 220px; left: 750px; z-index: 1;">
+    <li class="context-menu-item resource-download context-menu-download"><span><i class="icon-down-big"></i> ダウンロード</span></li>
+    <li class="context-menu-item resource-remove context-menu-remote-remove"><span><i class="icon-trash-7"></i> 削除</span></li>
+    <li class="context-menu-item change-resource-name context-menu-remote-change-name"><span><i class="icon-tags"></i> 名前変更</span></li>
+    <li class="context-menu-item make-directory"><span><i class="icon-folder-add"></i> フォルダ作成</span></li>
+</ul>

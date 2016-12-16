@@ -1,0 +1,20 @@
+﻿@using FTPClient.BL.Model;
+@using FTPClient.BL.Settings;
+
+@model FTPClient.Models.FTPControlModel
+
+<div class="ftp-operation-log">
+    <span class="log-header">
+        <i class="icon-doc-text"></i> LOG
+    </span>
+    <span class="log-header log-header-right">
+        <a href="/BGFTP/DownloadLog" class="btn btn-bar-small" title="ダウンロード"><i class="icon-download-alt"></i></a>
+        <button type="button" id="btn_remove_log" class="btn btn-bar-small" title="クリア"><i class="icon-eraser"></i></button>
+    </span>
+    @Html.TextAreaFor(m => m.OperationLog, new {
+    @class = "log",
+    cols = 35,
+    rows = 3,
+    @readonly = true
+})
+</div>

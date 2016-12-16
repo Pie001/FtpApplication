@@ -1,0 +1,49 @@
+﻿@using FTPClient.BL.Model;
+@using FTPClient.BL;
+@using FTPClient.BL.Settings;
+
+@model FTPClient.Models.FTPControlModel
+
+<div class="modal fade" id="modal_host_option" tabindex="-1" role="dialog" aria-labelledby="add-site-label" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            @using (Html.BeginForm(null, null, FormMethod.Post, new {
+                id = "form_host_settings"
+            }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4><i class="icon-cog-5"></i> <span>接続設定</span></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-hostOption-content">
+                        <div class="host-menu">
+                            <button type="button" id="btn_new_host" class="btn btn-default btn-hostmenu" title="新規ホストを追加"><i class="icon-plus-3"></i> New</button>
+                            <button type="button" id="btn_edit_host" class=" btn btn-default btn-hostmenu" title="ホストの内容を変更"><i class="icon-pencil-6"></i> Edit</button>
+                            <button type="button" id="btn_copy_host" class="btn btn-default btn-hostmenu" title="既存ホストのコピー"><i class="icon-popup-1"></i> Copy</button>
+                            <button type="button" id="btn_remove_host" class="btn btn-default btn-hostmenu" title="ホストの削除"><i class="icon-trash-7"></i> Remove</button>
+                        </div>
+
+                        <div class="host-list host-list-modal">
+                            <ul id="host_list_block">
+                                @foreach (HostDetailModel host in Model.HostList)
+                                {
+                                    <li data-hostid="@host.HostID"><i class="icon-monitor"></i> @host.HostName</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+
+            }
+        </div>
+    </div>
+    @Html.Partial("_Loading")
+</div>

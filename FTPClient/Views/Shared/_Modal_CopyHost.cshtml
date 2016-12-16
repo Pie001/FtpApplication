@@ -1,0 +1,32 @@
+﻿@model FTPClient.Models.CopyHostModel
+
+<div class="modal fade" id="modal_copy_host" tabindex="-1" role="dialog" aria-labelledby="add-site-label" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (Html.BeginForm(null, null, FormMethod.Post, new {
+                id = "form_copy_host"
+            }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4><i class="icon-popup-1"></i> New Host Name</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="master-host-name"></p>
+                    @Html.TextBoxFor(m => m.NewHostName, new {
+                   @style = "width:200px;"
+               })
+                    <p class="modal-info">※ホスト名が空白の場合、仮の名前でホストがコピーされます。</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" name="Connect" id="btn_copy_host_submit" class="btn btn-default btn-popupmenu"><i class="icon-ok-5"></i> OK</button>
+                    <button type="button" name="Connect" class="btn btn-default btn-popupmenu btn-etc" data-dismiss="modal"><i class="icon-cancel-6"></i> Cancel</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

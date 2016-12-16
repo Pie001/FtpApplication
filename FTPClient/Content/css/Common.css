@@ -1,0 +1,521 @@
+﻿/* ====== 画面のCSS ====== */
+html, body, div, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-size: 12px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: inherit;
+    position: relative;
+    background-color: #f8f8f8;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+}
+
+.ftp-control {
+    margin: 0 auto;
+    border: 1px solid #808080;
+    background-color: #9CA1B2;
+    padding: 0.2em 14px 14px 14px;
+    width: 1000px;
+    height: 100%;
+    font-size: 12px;
+}
+
+.server {
+    overflow: hidden;
+}
+
+li {
+    padding: 1px 1px 1px 4px;
+}
+
+.server-container {
+    float: left;
+    width: 49.795%;
+    padding: 8px 12px 12px 12px;
+    height: 100%;
+    overflow: auto;
+    background: #f8f8f8;
+    margin: 1px;
+}
+
+.log-header {
+    float: left;
+    width: 49.6%;
+}
+
+.log-header-right {
+    text-align: right;
+}
+
+.ftp-operation-log {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f8f8;
+}
+
+label {
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+textarea {
+    background-color: #f8f8f8;
+    font-size: 12px;
+    line-height: 120%;
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+
+.init-host {
+    margin: 0 auto;
+    background-color: #9CA1B2;
+    padding: 10px 20px 30px 20px;
+    border: 1px solid #808080;
+    width: 500px;
+}
+
+.host-main {
+    overflow-y: scroll;
+    width: 100%;
+    height: 150px;
+    background-color: #f8f8f8;
+    font-size: 12px;
+    font-weight: 200;
+    line-height: 1.5;
+    padding: 5px;
+}
+
+.host-list-modal {
+    border: 1px solid #c8c8c8;
+}
+
+.host-list-select {
+    background-color: #D5DEFF;
+    font-size: 12px;
+    font-weight: 200;
+    line-height: 1.5;
+}
+
+label.title {
+    font-size: 16px;
+}
+
+.headtitle {
+    font-size: 12px;
+    margin-left: 4px;
+    margin-right: 12px;
+}
+
+div.block-right {
+    margin-top: 8px;
+    text-align: right;
+}
+
+div.block-left {
+    text-align: left;
+}
+
+input[type="text"] {
+    border: 1px solid #c8c8c8;
+    font-size: 0.8em;
+}
+
+div.host-option {
+    display: none;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 14px;
+}
+
+input:disabled {
+    color: #000;
+    background-color: #f8f8f8;
+    padding-left: 3px;
+}
+
+select.host-select {
+    width: 25%;
+    height: 25px;
+}
+
+div.directory-menu {
+    margin-bottom: 8px;
+}
+
+span.icon-container {
+    margin-right: 10px;
+}
+
+textarea.log {
+    margin-top: 5px;
+}
+
+.connect-test-result {
+    padding: 10px 20px 1px 20px;
+    text-align: left;
+    border-top: 1px solid #e5e5e5;
+}
+
+span.connect-test-ng {
+    color: #ff0000;
+}
+
+/* ====== バリデーションのCSS ====== */
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #c55050;
+    background-color: #ffe1e1;
+}
+
+.modal-body-gray {
+    background-color: #c8c8c8;
+}
+
+.modal-hostOption-content {
+    margin-bottom: 24px;
+}
+
+.host-menu {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.ui-selecting, .ui-selected {
+    background: #D5DEFF;
+}
+
+@media screen and (min-height:350px) {
+    .list-block {
+        overflow-y: scroll;
+        width: 100%;
+        height: 100px;
+    }
+}
+
+@media screen and (min-height: 669px) {
+    .list-block {
+        overflow-y: scroll;
+        width: 100%;
+        height: 300px;
+    }
+}
+
+@media screen and (min-height: 900px) {
+    .list-block {
+        overflow-y: scroll;
+        width: 100%;
+        height: 600px;
+    }
+}
+
+.file-list-header {
+    display: table;
+    width: 100%;
+    border: 1px solid #bdc4e4;
+}
+
+.file-list-detail {
+    display: table;
+    width: 100%;
+    padding-top: 1em;
+    padding-bottom: 2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.local-server-list {
+    width: 100%;
+    height: 100%;
+}
+
+.remote-server-list {
+    width: 100%;
+    height: 100%;
+}
+
+.file-header {
+    display: table-row;
+    background: #BCCAFF;
+    color: #1e1e1e;
+    padding: 4px;
+}
+
+.file-item {
+    display: table-row;
+}
+
+    .file-item span, .file-header span {
+        display: table-cell;
+        max-width: 1px; /* for ellipsis */
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding-left: 4px;
+        padding-right: 6px;
+    }
+
+    .file-item > .file-name, .file-header > .file-name {
+        width: 40%;
+    }
+
+    .file-item > .file-date, .file-header > .file-date {
+        width: 30%;
+    }
+
+    .file-item > .file-size, .file-header > .file-size {
+        width: 80px;
+        text-align: right;
+    }
+
+    .file-item > .file-type, .file-header > .file-type {
+        width: auto;
+    }
+
+button.btn-etc {
+    background-color: #c8c8c8;
+}
+
+.btn-bar {
+    margin-right: 0.15em;
+    padding: 0;
+    font-size: large;
+    color: #333;
+    background-color: #E7E7E7;
+}
+
+    .btn-bar:disabled {
+        margin-right: 0.15em;
+        padding: 0;
+        font-size: large;
+        color: #808080;
+        background-color: #aeb3c4;
+    }
+
+    .btn-bar:hover {
+        color: #111;
+        background-color: #f8f8f8;
+    }
+
+.btn-bar-small {
+    margin: 0;
+    padding: 0;
+    font-size: small;
+    color: #333;
+    background-color: transparent;
+}
+
+    .btn-bar-small:hover {
+        color: #666;
+    }
+
+.sever-path {
+    width: 94%;
+    border: 1px solid transparent;
+    height: 25px;
+}
+
+input[type="text"].sever-path {
+    border: none;
+    font-size: 12px;
+}
+
+.btn-host-option:hover {
+    color: #4466eb;
+}
+
+.btn-host-connect:hover {
+    color: #54e045;
+}
+
+.btn-host-disconnect:hover {
+    color: #e92a2a;
+}
+
+.btn-backward:hover {
+    color: #0029ce;
+}
+
+.btn-filter:hover {
+    color: #00aad0;
+}
+
+.btn-refresh:hover {
+    color: #e5ae16;
+}
+
+.btn-resource-remove:hover {
+    color: #584819;
+}
+
+.btn-change-resource-name:hover {
+    color: #ae1ac4;
+}
+
+.btn-make-directory:hover {
+    color: #e53f11;
+}
+
+/* ========= context-menu ========= */
+
+.context-menu-list {
+    margin: 0;
+    padding: 0;
+    min-width: 120px;
+    max-width: 250px;
+    display: inline-block;
+    position: absolute;
+    list-style-type: none;
+    border: 1px solid #DDD;
+    background: #EEE;
+    -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    -o-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 11px;
+}
+
+.context-menu-item {
+    padding: 2px 2px 2px 10px;
+    background-color: #EEE;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    .context-menu-item:hover {
+        background-color: #9CA1B2;
+    }
+
+.modal-info {
+    color: #ff0000;
+}
+
+div.filter-block {
+    text-align: right;
+}
+
+.btn-filter-submit {
+    font-size: 0.6em;
+}
+
+/* ========= host input ========= */
+.input-host-name {
+    width: 100%;
+}
+
+.input-host-address {
+    width: 280px;
+}
+
+.input-port-number {
+    width: 100%;
+}
+
+.input-user-name {
+    width: 100%;
+}
+
+.input-password {
+    width: 100%;
+}
+
+.input-timeout {
+    width: 50px;
+}
+
+.host-input-td-timeout {
+    width: 50px;
+    display: table-cell;
+}
+
+.input-local-server-path {
+    width: 100%;
+}
+
+.host-input-table {
+    display: table;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.host-input-tr {
+    display: table-row;
+}
+
+.host-input-td-title {
+    display: table-cell;
+    width: 100px;
+}
+
+.host-input-td-title-between {
+    display: table-cell;
+    width: 100px;
+    padding-left: 5px;
+}
+
+.host-input-td-detail {
+    display: table-cell;
+    width: auto;
+}
+
+/* -------------- loading -------------- */
+.loading {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,.8);
+    z-index: 1000;
+}
+
+    .loading .loading-content {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+        .loading .loading-content i {
+            vertical-align: middle;
+            text-align:center;
+            margin:auto;
+            width: auto;
+            font-size: 30px;
+        }
+
+        .loading .loading-content label {
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            text-align: center;
+            font-size: 25px;
+        }

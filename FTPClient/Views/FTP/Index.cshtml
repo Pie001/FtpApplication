@@ -1,0 +1,43 @@
+﻿@using FTPClient.Models;
+@using FTPClient.BL.Model;
+@using FTPClient.BL;
+@using FTPClient.BL.Settings;
+
+@model FTPClient.Models.FTPControlModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section footer_js{
+    @Scripts.Render("~/Content/js/Connect")
+    @Scripts.Render("~/Content/js/Control")
+}
+
+<div class="ftp-control">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new {
+        id = "form_ftp_control"
+    }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("_HostMenu", Model)
+        <div class="directory-menu">
+            <button type="button" id="btn_backward" class="btn btn-bar btn-backward" title="一つ前のディレクトリへ移動"><i class="icon-reply"></i></button>
+            <button type="button" id="btn_refresh" class="btn btn-bar btn-refresh" title="最新の情報に更新"><i class="icon-arrows-cw"></i></button>
+            <button type="button" id="btn_resource_remove" class="btn btn-bar btn-resource-remove resource-remove" title="削除"><i class="icon-trash-7"></i></button>
+            <button type="button" id="btn_change_resource_name" class="btn btn-bar btn-change-resource-name change-resource-name"title="名前変更"><i class="icon-tags"></i></button>
+            <button type="button" id="btn_make_directory" class="btn btn-bar btn-make-directory make-directory" title="新しいディレクトリを作成"><i class="icon-folder-add"></i></button>
+        </div>
+
+        @Html.Partial("_Server", Model)
+        @Html.Partial("_OperationLog", Model)
+
+    }
+</div>
+
+@Html.Partial("_Loading")
+@Html.Partial("_Modal_HostOption", Model)
+@Html.Partial("_Modal_CopyHost", new CopyHostModel())
+@Html.Partial("_Modal_EditHost", new FTPHostDetailModel())
+@Html.Partial("_Modal_ChangeResourceName", new ChangeResourceNameModel())
+@Html.Partial("_Modal_MakeDirectory", new MakeDirectoryModel())

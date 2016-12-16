@@ -1,0 +1,23 @@
+﻿@using FTPClient.BL.Model;
+
+@model FTPClient.Models.FTPControlModel
+
+<div class="host-menu host-control">
+    <select name="host_list" id="host_list" class="host-select">
+        @foreach (HostDetailModel host in Model.HostList)
+        {
+            if (Model.SelectedHostID == host.HostID)
+            {
+                <option value="@host.HostID" selected>@host.HostName</option>
+            }
+            else
+            {
+                <option value="@host.HostID">@host.HostName</option>
+            }
+        }
+    </select>
+    <button type="button" id="btn_host_option" class="btn btn-bar btn-host-option" title="ホスト設定"><i class="icon-cog-circled"></i></button>
+    <button type="button" id="btn_host_connect" class="btn btn-bar btn-host-connect" title="接続"><i class="icon-play-circled-1"></i></button>
+    <button type="button" id="btn_host_disconnect" class="btn btn-bar btn-host-disconnect" title="切断"><i class="icon-stop-circled"></i></button>
+</div>
+
